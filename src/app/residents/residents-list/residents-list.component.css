@@ -1,0 +1,29 @@
+.table-head-controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.residents-table {
+    min-width: 768px;
+}
+
+.accessibility {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    width: 100%;
+}
+
+.accessibility-ok {
+    color: green
+}
+
+.accessibility-none {
+    color: red
+}
+
+.starred-phone {
+    margin-left: 15px;
+}

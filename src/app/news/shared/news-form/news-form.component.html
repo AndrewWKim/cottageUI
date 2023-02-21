@@ -1,0 +1,33 @@
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
+  <mat-card-content>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <textarea class="big-textarea" matInput placeholder="Содержание новости"
+          [formControlName]="ADDITIONAL_INFO_FORM_KEY"></textarea>
+        <mat-error *ngIf="form.controls[ADDITIONAL_INFO_FORM_KEY].hasError('required')">
+          Введите содержание новости
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row" *ngIf="news">
+      <div class="checkbox-container">
+        <span>Архивировать</span>
+        <mat-checkbox [formControlName]="STATUS_FORM_KEY"></mat-checkbox>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/news" type="button">Отмена</button>
+    <button [buttonSpinner]="saveButtonDisabled" [disabled]="saveButtonDisabled  || !form.valid" type="submit"
+      mat-button class="mat-raised-button mat-primary">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</form>

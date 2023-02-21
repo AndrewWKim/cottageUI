@@ -1,0 +1,55 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>home</mat-icon>Участки
+      </h1>
+    </mat-card-title>
+
+    <div>
+      <div class="table-head-controls">
+        <span class="spacer"></span>
+        <button mat-button class="mat-raised-button mat-primary"  (click)="tryGoToCreate()">
+          Создать Участок
+        </button>
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="cottages-table">
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="cottageNumber">
+              <mat-header-cell *matHeaderCellDef>Номер Участка</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.cottageNumber}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="area">
+              <mat-header-cell *matHeaderCellDef>Площадь</mat-header-cell>
+              <mat-cell *matCellDef="let element"><span class="area-number">{{element.area}}</span>{{getMeterDeclension(element.area)}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="edit(element.id)" title="Редактировать">
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+          </mat-table>
+        </div>
+
+        <mat-paginator (page)="pageChanged($event)" [length]="paging.total" [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</section>

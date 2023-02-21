@@ -1,0 +1,33 @@
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
+  <mat-card-content>
+
+    <div class="flex-row">
+      <mat-form-field>
+        <input matInput placeholder="Номер Участка" [formControlName]="COTTAGE_NUMBER_FORM_KEY" maxLength="9"> 
+        <mat-error *ngIf="form.controls[COTTAGE_NUMBER_FORM_KEY].hasError('required')">
+          Введите номер Участка.
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <mat-form-field>
+          <input matInput appNumbersOnly appLimitToMax placeholder="Площадь" [formControlName]="AREA_FORM_KEY"
+            [max]="maxArea">
+          <mat-error *ngIf="form.controls[AREA_FORM_KEY].hasError('required')">
+            Введите площадь.
+          </mat-error>
+        </mat-form-field>
+        <div class="measure">{{meterDeclension}}</div>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/cottages" type="button">Отмена</button>
+    <button [buttonSpinner]="saveButtonDisabled" [disabled]="saveButtonDisabled || !form.valid" type="submit" mat-button
+      class="mat-raised-button mat-primary">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</form>

@@ -1,0 +1,8 @@
+<section>
+  <mat-card>
+    <mat-card-title>
+      <h1>Редактирование Жильца</h1>
+    </mat-card-title>
+    <app-resident-form [resident]=resident (onSubmit)="saveResident($event)" [formType]=formType></app-resident-form>
+  </mat-card>
+</section>

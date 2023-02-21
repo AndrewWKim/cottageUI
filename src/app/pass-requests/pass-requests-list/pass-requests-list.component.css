@@ -1,0 +1,46 @@
+.table-head-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pass-requests-table {
+    min-width: 768px;
+}
+
+.pass-requests-filter-input {
+    margin-right: 8px;
+}
+
+.pass-request-icon {
+    color: #f36c3d;
+}
+
+.date-filter-input {
+    margin-right: 30px;
+    position: relative;
+}
+
+.clear-date-icon {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.clear-date-icon mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.clear-date-icon:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    background: rgba(234, 98, 82, 0.3);
+}

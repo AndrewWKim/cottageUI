@@ -1,0 +1,44 @@
+<table class="table table-hover" [ngClass]="cssClass">
+    <thead>
+        <tr class="active"> 
+            <th *ngFor="let column of columns"
+                [ngClass]="column.cssClass"
+                [class.sortable]="column.sortable"
+                (click)="sort(column)">
+                {{column.title}}
+
+                <sort-icon 
+                    [column]="column.name"
+                    [sortColumn]="sortColumn" 
+                    [sortDirection]="sortDirection">
+                </sort-icon>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngIf="items?.length == 0">
+            <td [attr.colspan]="columns.length">
+                <h4 class="text-center text-muted">{{emptyText}}</h4>
+            </td>
+        </tr>
+
+        <tr *ngFor="let item of items; let i = index" 
+            [ngClass]="getRowCssClass(item)" 
+            (click)="select(item)">
+
+            <td *ngFor="let column of columns" 
+                [ngClass]="column.cellCssClass" 
+                (click)="selectCell(column, item)">
+
+                <data-table-cell 
+                    [column]="column" 
+                    [item]="item" 
+                    [index]="i">
+                </data-table-cell>
+
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

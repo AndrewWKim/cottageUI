@@ -1,0 +1,9 @@
+<span *ngIf="!column.template">
+  {{ value }}
+</span>
+
+<ng-template
+    *ngIf="column.template"
+    [ngTemplateOutlet]="column.template" 
+    [ngTemplateOutletContext]="{ value: value, item: item, column: column, index: index }">
+</ng-template>

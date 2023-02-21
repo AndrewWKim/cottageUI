@@ -1,0 +1,14 @@
+.table-head-controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cottages-table {
+    min-width: 768px;
+}
+
+.area-number {
+    font-weight: 500;
+    margin-right: 10px;
+}

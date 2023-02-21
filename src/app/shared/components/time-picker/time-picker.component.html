@@ -1,0 +1,15 @@
+<div [formGroup]="timeForm">
+    <mat-form-field>
+      <input matInput [textMask]="{mask: timeMask}" placeholder="{{placeholder}}" formControlName="time">
+      <mat-error *ngIf="timeForm.controls['time'].errors?.InvalidTime">
+        Invalid time
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Format" formControlName="timeFormat">
+        <mat-option [value]="'AM'">AM</mat-option>
+        <mat-option [value]="'PM'">PM</mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+

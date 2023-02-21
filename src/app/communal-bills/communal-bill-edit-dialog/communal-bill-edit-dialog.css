@@ -1,0 +1,14 @@
+.cancel-btn {
+    margin-left: 50px;
+}
+
+.mat-dialog-actions {
+    justify-content: center;
+}
+
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

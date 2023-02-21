@@ -1,0 +1,86 @@
+<div class="flex-col">
+  <mat-card-title>
+    <h4>Добавить автомобиль</h4>
+  </mat-card-title>
+  <div class="flex-row">
+    <form [formGroup]="carForm" novalidate (ngSubmit)="submit()">
+      <mat-card-content>
+
+        <div class="flex-row">
+
+          <mat-form-field>
+            <input matInput placeholder="Марка" [formControlName]="CAR_BRAND_FORM_KEY" maxLength="15">
+            <mat-error *ngIf="carForm.controls[CAR_BRAND_FORM_KEY].hasError('required-no-whitespace')">
+              Введите Марку.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Модель" [formControlName]="CAR_MODEL_FORM_KEY" maxLength="15">
+            <mat-error *ngIf="carForm.controls[CAR_MODEL_FORM_KEY].hasError('required-no-whitespace')">
+              Введите Модель.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Номер" [formControlName]="CAR_LICENSE_PLATE" maxLength="15">
+            <mat-error *ngIf="carForm.controls[CAR_LICENSE_PLATE].hasError('required-no-whitespace')">
+              Введите Номер Машины.
+            </mat-error>
+          </mat-form-field>
+
+          <button [disabled]="!carForm.valid" type="submit" mat-button class="mat-raised-button mat-primary add-button">
+            <mat-icon>add</mat-icon>
+          </button>
+
+        </div>
+
+      </mat-card-content>
+
+    </form>
+  </div>
+</div>
+
+
+
+<div class="flex-col" *ngIf="cars.length > 0">
+
+  <mat-card-title>
+    <h4>Список автомобилей</h4>
+  </mat-card-title>
+
+  <div class="flex-row">
+    <mat-table [dataSource]="dataSource" class="cars-table">
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <ng-container matColumnDef="brand">
+        <mat-header-cell *matHeaderCellDef>Марка</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.brand}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="model">
+        <mat-header-cell *matHeaderCellDef>Модель</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.model}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="carLicensePlate">
+        <mat-header-cell *matHeaderCellDef>Номер</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.carLicensePlate}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="remove(element)" title="Удалить">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+
+  </div>
+
+</div>

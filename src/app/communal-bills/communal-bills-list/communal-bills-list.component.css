@@ -1,0 +1,39 @@
+.table-head-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.communal-bills-table {
+    min-width: 768px;
+}
+
+.communal-bill-filter-input {
+    margin-right: 20px;
+}
+
+.paid {
+    border-radius: 10px;
+    padding: 5px;
+    background: #31c073;
+}
+
+.unpaid {
+    border-radius: 10px;
+    padding: 5px;
+    background: #ea6252;
+    color: white;
+}
+
+.process {
+    border-radius: 10px;
+    padding: 5px;
+    background: #91ac24;
+}
+
+.partialy {
+    border-radius: 10px;
+    padding: 5px;
+    background: #800080;
+    color: white;
+}

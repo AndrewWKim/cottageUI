@@ -1,0 +1,37 @@
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
+  <mat-card-content>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <textarea class="big-textarea" matInput placeholder="Идея"
+          [formControlName]="ADDITIONAL_INFO_FORM_KEY"></textarea>
+        <mat-error *ngIf="form.controls[ADDITIONAL_INFO_FORM_KEY].hasError('required')">
+          Введите содержание идеи
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row">
+      <div class="checkbox-container" *ngIf="idea?.status !== ideaStatuses.Published">
+        <span>Опубликовать</span>
+        <mat-checkbox [formControlName]="STATUS_FORM_KEY"></mat-checkbox>
+      </div>
+      <div class="checkbox-container" *ngIf="idea?.status === ideaStatuses.Published">
+        <span>Архивировать</span>
+        <mat-checkbox [formControlName]="STATUS_FORM_KEY"></mat-checkbox>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/ideas" type="button">Отмена</button>
+    <button [buttonSpinner]="saveButtonDisabled" [disabled]="saveButtonDisabled  || !form.valid" type="submit"
+      mat-button class="mat-raised-button mat-primary">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</form>

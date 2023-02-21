@@ -1,0 +1,340 @@
+  /* You can add global styles to this file, and also import other style files */
+@import "clinic-theme.css";
+
+body
+{
+    background-color: #0071d1
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dark-backdrop {
+  background: #000;
+  opacity: 0.75 !important;
+}
+
+body, html {
+  margin: 0px;
+  height: 100vh;
+}
+
+.content-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0071d1 !important;
+}
+
+.content-center::after {
+  content: "";
+  background: #4995d8;
+  opacity: 0.27;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer > x3 {
+  flex: 3 3 auto;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+}
+
+mat-card {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin: 16px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 12px 25px -5px rgba(0,0,0,.35) !important;
+}
+
+mat-card > mat-card-actions {
+  display: flex !important;
+  padding-bottom: 4px !important;
+}
+
+mat-cell {
+  display: flex;
+}
+
+.table-head-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.flex-row .mat-form-field {
+  width: initial;
+}
+
+.mat-dialog-content .flex-row .mat-form-field {
+  width: 200px;
+}
+
+.flex-row > * {
+  flex: 1 1 100px;
+  padding: 10px;
+}
+
+.flex-row > .x2 {
+  flex: 2 2 100px;
+}
+
+.flex-row > .x3 {
+  flex: 3 3 100px;
+}
+
+.flex-row > .x4 {
+  flex: 4 4 100px;
+}
+
+.flex-row > .x05 {
+  flex: 0.5 0.5 100px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-6 {
+  flex: 1 1 auto;
+  padding: 10px;
+}
+
+.auth-card {
+  width: 400px;
+  height: 300px;
+}
+
+mat-select + mat-error, mat-radio-group + mat-error, mat-selection-list + mat-error, mat-slide-toggle + mat-error, mat-button-toggle-group + mat-error, .error {
+  font-size: 75%;
+  font-weight: normal;
+}
+
+.logo{
+  opacity: .7;
+  cursor: pointer;
+  color: 'white';
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.mat-card-actions{
+  margin: 0 5px 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+}
+
+/* --helpers */
+.no-l-marg{
+  margin-left: 0 !important;
+}
+
+/* Media Query */
+
+
+
+@media (max-width: 420px) {
+  .confirm {
+    min-width: 360px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .mat-table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    _overflow: auto;
+    display: table;
+    padding-bottom: 1px;
+  }
+}
+
+.table-wrapper{
+  overflow-x: auto;
+  background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+}
+
+/* Snackbar customization */
+.mat-snack-bar-container.error-snackbar {
+  display: block;
+  background-color: #F44336 !important;
+  transform: translateY(167%) !important;
+}
+
+.mat-snack-bar-container.error-snackbar .mat-simple-snackbar,
+.mat-snack-bar-container.success-snackbar .mat-simple-snackbar {
+  justify-content: start;
+  font-size: 18px;
+}
+
+.mat-snack-bar-container.error-snackbar .mat-simple-snackbar:before {
+  font-family: "Material Icons";
+  content: "\E000";
+  font-size: 26px;
+  margin-right: 10px;
+}
+
+.mat-snack-bar-container.error-snackbar .mat-simple-snackbar:after,
+.mat-snack-bar-container.success-snackbar .mat-simple-snackbar:after {
+  content: "x";
+  cursor: pointer;
+  position: absolute;
+  right: 0.3vw;
+  top: 0.2vw;
+}
+
+.mat-snack-bar-container.success-snackbar {
+  display: block;
+  background-color: #4CAF50 !important;
+  transform: translateY(3.5vw) !important;
+}
+
+.mat-snack-bar-container.success-snackbar .mat-simple-snackbar:before {
+  font-family: "Material Icons";
+  content: "\E876";
+  font-size: 26px;
+  margin-right: 10px;
+}
+
+/* Preloader */
+@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(.5) rotateX(0deg); opacity: 0; }
+    50% { -webkit-transform: scale(1) rotateX(720deg); opacity: 1; }
+    100% { -webkit-transform: scale(.5) rotateX(540deg); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(.5) rotateX(0deg); opacity: 0; }
+    50% { transform: scale(1) rotateX(720deg); opacity: 1; }
+    100% { transform: scale(.5) rotateX(540deg); opacity: 0; }
+}
+
+#preloadWrapper{
+  background: rgba(0, 0, 0, .75);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease-in-out;
+}
+#preloadWrapper.hide{
+  opacity: 0;
+  display: none;
+}
+
+.preloader{
+  width: 90%;
+  max-width: 350px;
+  min-width: 100px;
+  height: 90%;
+  min-height: 50px;
+  max-height: 200px;
+  -webkit-animation: pulse 1.75s infinite ease-in-out;
+  -o-animation: pulse 1.75s infinite ease-in-out;
+  -ms-animation: pulse 1.75s infinite ease-in-out; 
+  -moz-animation: pulse 1.75s infinite ease-in-out; 
+  animation: pulse 1.75s infinite ease-in-out;
+}
+
+/* Forms */
+fieldset{
+  border: none !important;
+  padding: 0 !important;
+}
+.mat-form-field-infix{
+  width: auto !important;
+}
+
+/* Tabs */
+.mat-tab-links{
+  flex-wrap: wrap;
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background: none;
+}
+.mat-tab-link.cdk-touch-focused{
+  background-color: transparent !important;
+}
+
+.icon-16 {
+  font-size: 16px !important;
+  height: 16px !important;
+  width: 16px !important;
+  line-height: 16px !important;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.no-padding-modalbox mat-dialog-container {
+  padding: 0px;
+}
+
+.no-padding-modalbox mat-dialog-content {
+  padding: 0px;
+  margin: 0;
+}
+
+.display-none {
+  display: none;
+}
+
+.mat-paginator-page-size-select
+{
+  width: 56px !important;
+}
+
+.load-spinner {
+  position: absolute;
+  top: 50vh;
+  left: 45%;
+  right: 45%;
+  z-index: 1000;
+}
+
+.button-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+}

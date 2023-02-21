@@ -1,0 +1,16 @@
+<div [class.has-feedback]="value">
+    <input type="text" class="form-control" 
+        #textInput
+        [(ngModel)]="value" 
+        [attr.placeholder]="placeholder" 
+        [attr.maxlength]="maxlength"
+        [disabled]="disabled"
+        (onEscKey)="clearText()" 
+        (blur)="onBluring($event)"
+        escKey />
+
+    <div class="glyphicon glyphicon-remove-sign text-muted form-control-feedback cursor-pointer" 
+        (click)="clearText()"
+        *ngIf="value">
+    </div>
+</div>

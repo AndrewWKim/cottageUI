@@ -1,0 +1,139 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>people</mat-icon>
+        Жильцы
+      </h1>
+    </mat-card-title>
+
+    <div>
+      <div class="table-head-controls">
+        <span class="spacer"></span>
+        <button
+          mat-button
+          class="mat-raised-button mat-primary"
+          routerLink="create"
+        >
+          Создать Жильца
+        </button>
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="residents-table">
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+            <ng-container matColumnDef="mobileAppAccessibility">
+              <mat-header-cell *matHeaderCellDef
+                >Доступ в мобильное приложение
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div
+                  class="accessibility"
+                  *ngIf="element.clientType !== clientTypes.Resident"
+                >
+                  <mat-icon matListIcon class="accessibility-ok">
+                    check_circle
+                  </mat-icon>
+                  {{ getClientAllowedActions(element.canPay, element.canVote) }}
+                </div>
+
+                <div
+                  class="accessibility"
+                  *ngIf="element.clientType == clientTypes.Resident"
+                >
+                  <mat-icon matListIcon class="accessibility-none">
+                    lock
+                  </mat-icon>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="residentFullName">
+              <mat-header-cell *matHeaderCellDef>Имя</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.fullName }}</mat-cell
+              >
+            </ng-container>
+
+            <ng-container matColumnDef="cottageNumber">
+              <mat-header-cell *matHeaderCellDef>Номер участка</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.cottage.cottageNumber }}</mat-cell
+              >
+            </ng-container>
+
+            <ng-container matColumnDef="residentType">
+              <mat-header-cell *matHeaderCellDef>Тип</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ getResidentType(element.residentTypeId) }}</mat-cell
+              >
+            </ng-container>
+
+            <ng-container matColumnDef="phoneNumber">
+              <mat-header-cell *matHeaderCellDef>Телефон</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.phoneNumber }}
+                <div
+                        class="starred-phone"
+                  *ngIf="element.cottage.mainSecurityContactId === element.id"
+                >
+                  <mat-icon matListIcon class="accessibility-ok">
+                    star
+                  </mat-icon>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="registrationCode">
+              <mat-header-cell *matHeaderCellDef
+                >Код регистрации
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{
+                  element.clientType !== clientTypes.Resident
+                    ? element.registrationCode
+                    : "Нет доступа"
+                }}</mat-cell
+              >
+            </ng-container>
+
+            <ng-container matColumnDef="loginName">
+              <mat-header-cell *matHeaderCellDef>Логин</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.loginName || "Не зарегистрирован" }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button
+                  mat-icon-button
+                  (click)="edit(element.id)"
+                  title="Редактировать"
+                >
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+          </mat-table>
+        </div>
+
+        <mat-paginator
+          (page)="pageChanged($event)"
+          [length]="paging.total"
+          [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+        >
+        </mat-paginator>
+      </mat-card-content>
+      <mat-card-actions></mat-card-actions>
+    </div>
+  </mat-card>
+</section>

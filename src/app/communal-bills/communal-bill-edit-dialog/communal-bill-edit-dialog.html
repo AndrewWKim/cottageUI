@@ -1,0 +1,31 @@
+<form [formGroup]="paymentStatusForm">
+    <h1 mat-dialog-title>Изменить статус</h1>
+    <div mat-dialog-content>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput placeholder="Номер участка" formControlName="cottageNumber">
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput placeholder="Тип услуги" formControlName="communalType">
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput placeholder="Месяц" formControlName="month">
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput placeholder="Год" formControlName="year">
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput placeholder="Сумма" formControlName="price">
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <mat-select placeholder="Статус" formControlName="paymentStatus">
+                <mat-option *ngFor="let item of paymentStatuses" [value]="item.id">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="updatePaymentStatus()" cdkFocusInitial>Сохранить</button>
+        <button mat-button (click)="cancel()">Отмена</button>
+    </div>
+</form>

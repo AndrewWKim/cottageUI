@@ -1,0 +1,37 @@
+.flex-container {
+    text-align: center;
+    box-shadow: 1px 1px 1px 1px silver;
+    width: 100%;
+
+    .mat-raised-button.mat-primary {
+        background-color: #3f51b5;
+        padding: 4px 10px;
+        margin-right: 1px;
+        line-height: 1.5;
+
+        &.active {
+            background-color: #f36c3d !important;
+        }
+
+        &.scroll-date-button {
+            min-width: 30px !important;
+            padding: 3px 10px !important;
+            top: -1px;
+
+            .mat-icon {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .dates-picker {
+        display: inline-block;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    
+    .section {
+        display: inline-block;
+        text-align: center;
+    }
+}

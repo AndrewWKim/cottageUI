@@ -1,0 +1,69 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>sticky_note_2</mat-icon>Новости
+      </h1>
+    </mat-card-title>
+
+    <div>
+      <div class="table-head-controls" [formGroup]="filters">
+        <mat-form-field class="status-filter">
+          <mat-select placeholder="Статус идеи" formControlName="status" multiple>
+            <mat-option *ngFor="let item of statuses" [value]="item.id">
+              {{ item.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <button mat-button class="mat-raised-button mat-primary" routerLink="create">
+          Создать Новость
+        </button>
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="news-table">
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="additionalInfo">
+              <mat-header-cell *matHeaderCellDef>Содержание новости</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.additionalInfo}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="publicationDate">
+              <mat-header-cell *matHeaderCellDef class="status-cell">Дата публикации</mat-header-cell>
+              <mat-cell *matCellDef="let element" class="status-cell">
+                {{element.publicationDate | date: 'dd.MM.yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef class="status-cell">Статус</mat-header-cell>
+              <mat-cell *matCellDef="let element" class="status-cell">
+                <div class="published" *ngIf="element.status === newsStatuses.Published">Опубликовано</div>
+                <div class="archived" *ngIf="element.status === newsStatuses.Archived">Архив</div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef class="action-cell"></mat-header-cell>
+              <mat-cell *matCellDef="let element" class="action-cell">
+                <button mat-icon-button (click)="edit(element.id)" title="Редактировать" *ngIf="element.status !== newsStatuses.Archived">
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+          </mat-table>
+        </div>
+
+        <mat-paginator (page)="pageChanged($event)" [length]="paging.total" [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </mat-card-content>
+    </div>
+  </mat-card>
+</section>

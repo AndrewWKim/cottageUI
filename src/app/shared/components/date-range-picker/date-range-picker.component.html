@@ -1,0 +1,77 @@
+<div class="flex-container">
+    <div class="section scroll-buttons">
+        <!-- Scroll days buttons -->
+        <button *ngIf="showScrollButtons"
+            class="mat-raised-button mat-primary scroll-date-button"
+            (click)="rangePrevious()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+
+        <button mat-button class="mat-raised-button mat-primary" (click)="rangeToday()">
+            Today
+        </button>
+
+        <button *ngIf="showScrollButtons"
+            class="mat-raised-button mat-primary scroll-date-button"
+            (click)="rangeNext()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </div>
+
+    <div class="section dates-arrange">
+        <!-- Start Date -->
+        <div class="dates-picker">
+            <mat-form-field>
+                <input matInput [matDatepicker]="startDatePicker"
+                        [(ngModel)]="start"
+                        value="{{start | date: DateFormat }}"
+                        (ngModelChange)="changeDate()"
+                        readonly>
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <!-- End Date -->
+        <div class="dates-picker"
+            [style.display]="dateFilter === dateFilterActive.Day ? 'none' : 'inline-block'">
+            <mat-form-field>
+                <input matInput [matDatepicker]="endDatePicker"
+                        [(ngModel)]="end"
+                        value="{{end | date: DateFormat }}"
+                        [min]="start"
+                        (ngModelChange)="changeDate()"
+                        readonly>
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="section">
+        <!-- Date intervals buttons -->
+        <button mat-button class="mat-raised-button mat-primary"
+            (click)="changeDateFilter(dateFilterActive.Month)"
+            [ngClass]="{'active': dateFilter === dateFilterActive.Month}">
+            Month
+        </button>
+
+        <button mat-button class="mat-raised-button mat-primary"
+            (click)="changeDateFilter(dateFilterActive.Week)"
+            [ngClass]="{'active': dateFilter === dateFilterActive.Week}">
+            Week
+        </button>
+
+        <button mat-button class="mat-raised-button mat-primary"
+            (click)="changeDateFilter(dateFilterActive.Day)"
+            [ngClass]="{'active': dateFilter === dateFilterActive.Day}">
+            Day
+        </button>
+        
+        <button mat-button class="mat-raised-button mat-primary"
+            (click)="changeDateFilter(dateFilterActive.Manually)"
+            [ngClass]="{'active': dateFilter === dateFilterActive.Manually}">
+            Manually
+        </button>
+    </div>
+</div>

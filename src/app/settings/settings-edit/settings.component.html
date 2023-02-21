@@ -1,0 +1,112 @@
+<section>
+    <mat-card>
+        <mat-card-title>
+            <h1>Настройки коттеджного посёлка</h1>
+        </mat-card-title>
+        <div>
+            <button
+                mat-stroked-button
+                type="button"
+                (click)="enableEditing()"
+                [disabled]="form.enabled"
+            >
+                Редактировать
+            </button>
+        </div>
+        <form [formGroup]="form" novalidate>
+            <mat-card-content>
+                <div class="flex-row">
+                    <mat-form-field>
+                        <input
+                            type="tel"
+                            matInput
+                            placeholder="Номер телефона охраны"
+                            [formControlName]="PHONE_NUMBER_FORM_KEY"
+                            [textMask]="{ mask: phoneMask }"
+                        />
+                        <mat-icon matSuffix>local_phone</mat-icon>
+                        <mat-error
+                            *ngIf="
+                                form.controls[PHONE_NUMBER_FORM_KEY].hasError(
+                                    'required'
+                                )
+                            "
+                        >
+                            Введите Номер Телефона.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="
+                                form.controls[PHONE_NUMBER_FORM_KEY].hasError(
+                                    'underscore'
+                                )
+                            "
+                        >
+                            Неверный формат
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="flex-row">
+                    <mat-form-field class="telegram">
+                        <input
+                            matInput
+                            placeholder="ID телеграм канала для охраны"
+                            [formControlName]="TELEGRAM_CHANNEL_FOR_SECURITY_FORM_KEY"
+                        />
+                        <mat-error
+                            *ngIf="
+                                form.controls[TELEGRAM_CHANNEL_FOR_SECURITY_FORM_KEY].hasError(
+                                    'required'
+                                )
+                            "
+                        >
+                            Введите айди канала.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="flex-row">
+                    <mat-form-field class="rules">
+                        <textarea
+                            #rulesTextArea
+                            matInput
+                            placeholder="Правила"
+                            [formControlName]="COTTAGE_RULES_HTML_FORM_KEY"
+                            [style.height]="form.enabled ? textareaHeight : '300px'"
+                            lines="auto"
+                        ></textarea>
+                        <mat-error
+                            *ngIf="
+                                form.controls[COTTAGE_RULES_HTML_FORM_KEY].hasError(
+                                    'required'
+                                )
+                            "
+                        >
+                            Введите Правила.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </form>
+        <mat-card-actions *ngIf="form.enabled">
+            <span class="spacer"></span>
+            <button
+                mat-button
+                type="button"
+                (click)="cancel()"
+                [disabled]="form.disabled"
+            >
+                Отмена
+            </button>
+            <button
+                type="submit"
+                mat-button
+                class="mat-raised-button mat-primary"
+                (click)="saveSettings()"
+                [disabled]="!form.valid"
+            >
+                Сохранить
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>

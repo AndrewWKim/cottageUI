@@ -1,0 +1,7 @@
+mat-dialog-content {
+	max-width: 600px;
+}
+
+app-time-picker >>> .mat-form-field {
+	width: 48% !important;
+}

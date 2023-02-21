@@ -1,0 +1,41 @@
+.table-head-controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.news-table {
+    min-width: 768px;
+}
+
+.action-cell {
+    max-width: 40px;
+}
+
+.status-cell {
+    max-width: 150px;
+}
+
+.status-filter {
+    width: 400px;
+}
+
+.published {
+    border-radius: 20px;
+    background: #0071d1;
+    padding: 5px 15px;
+    user-select: none;
+    color: white;
+    width: 100px;
+    text-align: center;
+}
+
+.archived {
+    border-radius: 20px;
+    background: red;
+    padding: 5px 15px;
+    user-select: none;
+    color: white;
+    width: 100px;
+    text-align: center;
+}

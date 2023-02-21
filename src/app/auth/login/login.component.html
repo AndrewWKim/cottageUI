@@ -1,0 +1,50 @@
+<mat-card class="auth-card">
+  <div class="logo-cottage"><span>Административная панель "New Side"</span></div>
+  <div id="preloadWrapper" [ngClass]="{'hide':isDataLoaded }">
+  </div>
+
+  <div>
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <div class="flex-row">
+          <mat-form-field>
+            <input matInput placeholder="Логин" [formControlName]="USERNAME_FORM_KEY">
+
+            <mat-error *ngIf="loginForm.controls[USERNAME_FORM_KEY].hasError('required')">
+              Введите логин.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="flex-row">
+          <mat-form-field>
+            <input matInput type="password" placeholder="Пароль" [formControlName]="PASSWORD_FORM_KEY">
+
+            <mat-error *ngIf="loginForm.controls[PASSWORD_FORM_KEY].hasError('required')">
+              Введите пароль.
+            </mat-error>
+
+
+          </mat-form-field>
+        </div>
+
+        <div class="flex-row">
+
+          <mat-error *ngIf="loginForm.controls[PASSWORD_FORM_KEY].errors?.invalid">
+            {{loginForm.controls[PASSWORD_FORM_KEY].errors?.error}}
+          </mat-error>
+
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <span class="spacer"></span>
+
+        <button mat-button class="mat-raised-button mat-primary" type="submit">
+          Войти
+        </button>
+      </mat-card-actions>
+    </form>
+  </div>
+</mat-card>

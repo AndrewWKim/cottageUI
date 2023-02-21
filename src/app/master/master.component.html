@@ -1,0 +1,52 @@
+<mat-toolbar *ngIf="showToolbar" color="primary">
+  <button type="button" mat-icon-button (click)="sidenav.toggle()" *ngIf="!onlyTopMenu">
+    <mat-icon class="md-24 mat-icon material-icons">menu</mat-icon>
+  </button>
+  <span class="logo" (click)="goToMainPage()">Коттеджный поселок "New Side"</span>
+  <div class="top-menu-buttons">
+    <ng-container *ngIf="onlyTopMenu">
+      <span *ngFor="let menuItem of menuItems">
+        <button mat-button [routerLink]="menuItem.url">
+          <mat-icon>{{menuItem.icon}}</mat-icon>
+          {{menuItem.title}}
+        </button>
+      </span>
+    </ng-container>
+
+  </div>
+
+  <span class="spacer"></span>
+  <span *ngIf="canAccessProfilePage">
+    <mat-icon class="icon">user</mat-icon>
+    <button mat-button [routerLink]="profileUrl">
+      <mat-icon class="md-24 mat-icon material-icons">account_circle</mat-icon>
+      {{loginUsername}}
+    </button>
+  </span>
+  <span *ngIf="!canAccessProfilePage" class="header-font">
+    {{loginUsername}}
+  </span>
+  <button mat-button (click)="logout();">
+    <mat-icon class="md-24 mat-icon material-icons">exit_to_app</mat-icon>
+    Выйти
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container [ngClass]="{ 'mat-sidenav-container': showToolbar, 'full-mat-sidenav-container': !showToolbar }">
+  <mat-sidenav #sidenav [mode]="sidenavMode" class="app-sidenav" [opened]="sidenavOpened" [hidden]="onlyTopMenu">
+
+    <mat-nav-list>
+      <ng-container *ngFor="let menuItem of menuItems">
+        <mat-list-item [routerLink]="menuItem.url" [disableRipple]="true" routerLinkActive="active">
+          <mat-icon matListIcon>{{menuItem.icon}}</mat-icon>
+          {{menuItem.title}}
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <div class="tabs">
+    <router-outlet (activate)="componentAdded($event)"></router-outlet>
+  </div>
+</mat-sidenav-container>

@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <div class="flex-row">
+    <div class="flex-col" [innerHTML]="message">
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <span class="spacer"></span>
+  <button mat-button [matDialogClose]="false" type="button" >{{cancelButtonText}}</button>
+  <button mat-button class="mat-raised-button mat-primary" [matDialogClose]="true" >{{confirmButtonText}}</button>
+</mat-dialog-actions>

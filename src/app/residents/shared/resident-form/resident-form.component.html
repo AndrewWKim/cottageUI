@@ -1,0 +1,160 @@
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
+  <mat-card-content>
+
+    <div class="flex-row" *ngIf="formType === 1">
+
+      <mat-form-field>
+        <mat-select placeholder="Выберите Роль Жильца*" [formControlName]="CLIENT_TYPE_FORM_KEY">
+          <mat-option *ngFor="let item of clientTypes" [value]="item.id">
+            {{ item.type}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls[CLIENT_TYPE_FORM_KEY].hasError('required')">
+          Выберите Роль Жильца.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <input matInput placeholder="Имя *" [formControlName]="FIRST_NAME_FORM_KEY" maxLength="50">
+        <mat-error *ngIf="form.controls[FIRST_NAME_FORM_KEY].hasError('required-no-whitespace')">
+          Введите Имя.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Фамилия *" [formControlName]="LAST_NAME_FORM_KEY" maxLength="50">
+        <mat-error *ngIf="form.controls[LAST_NAME_FORM_KEY].hasError('required-no-whitespace')">
+          Введите Фамилию.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <input type="tel" matInput placeholder="Номер телефона *" [formControlName]="PHONE_NUMBER_FORM_KEY"
+          [textMask]="{mask: phoneMask}">
+        <mat-icon matSuffix>local_phone</mat-icon>
+        <mat-error *ngIf="form.controls[PHONE_NUMBER_FORM_KEY].hasError('required')">
+          Введите Номер Телефона.
+        </mat-error>
+        <mat-error *ngIf="form.controls[PHONE_NUMBER_FORM_KEY].hasError('underscore')">
+          Неверный формат
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Дата Рождения" #datePicker appMaskDate
+          [formControlName]="DATE_OF_BIRTH_FORM_KEY" [max]="todayDate">
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.controls[DATE_OF_BIRTH_FORM_KEY].invalid">
+          Некорректная дата
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <input matInput placeholder="Серия и Номер Паспорта" [formControlName]="PASSPORT_FORM_KEY" appMaskPassport>
+        <mat-error *ngIf="form.controls[PASSPORT_FORM_KEY].hasError('underscore')">
+          Неверный формат
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="this.form.controls[this.CLIENT_TYPE_FORM_KEY].value === 2 || isCreateForm">
+        <mat-select placeholder="Выберите Участок *" [formControlName]="COTTAGE_ID_FORM_KEY">
+          <mat-option *ngFor="let item of cottages" [value]="item.id">
+            Участок № {{ item.cottageNumber}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls[COTTAGE_ID_FORM_KEY].hasError('required')">
+          Выберите Номер Участка.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="this.form.controls[this.CLIENT_TYPE_FORM_KEY].value === 1">
+        <input matInput placeholder="ИНН *" [formControlName]="ITN_FORM_KEY">
+        <mat-error *ngIf="form.controls[ITN_FORM_KEY].hasError('required-no-whitespace')">
+          Введите ИНН.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row" *ngIf="this.form.controls[this.CLIENT_TYPE_FORM_KEY].value === 2">
+
+      <mat-form-field>
+        <mat-select placeholder="Выберите Тип Жильца*" [formControlName]="RESIDENT_TYPE_ID_FORM_KEY">
+          <mat-option *ngFor="let item of residentTypes" [value]="item.id">
+            {{ item.type}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls[RESIDENT_TYPE_ID_FORM_KEY].hasError('required')">
+          Выберите Тип Жильца
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="flex-row" *ngIf="this.form.controls[this.CLIENT_TYPE_FORM_KEY].value === 2">
+      <div>
+        <div class="checkbox-container">
+          <span>Открыть доступ в мобильное приложение</span>
+          <mat-checkbox [formControlName]="GIVE_ACCESS_TO_MOBILE"></mat-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="can-container" *ngIf="this.form.controls[this.CLIENT_TYPE_FORM_KEY].value === 1 || this.form.controls[this.GIVE_ACCESS_TO_MOBILE].value === true">
+
+      <div class="warning">
+        <span class="warning-label">
+          (Только 1 человек из участка может голосовать и/или оплачивать коммунальные услуги)
+        </span>
+      </div>
+
+      <div class="can-checkboxes">
+        <div class="can-checkbox-container">
+          <span class="can-checkbox-label">Оплачивать коммунальные платежи</span>
+          <mat-checkbox [formControlName]="CAN_PAY_FORM_KEY"></mat-checkbox>
+        </div>
+
+        <div class="can-checkbox-container">
+          <span class="can-checkbox-label">Голосовать</span>
+          <mat-checkbox [formControlName]="CAN_VOTE_FORM_KEY"></mat-checkbox>
+        </div>
+      </div>
+
+    </div>
+
+    <app-car-selector [cars]=cars (onSubmit)="addCar($event)" (onRemove)="removeCar($event)"></app-car-selector>
+
+    <div class="flex-row">
+
+      <mat-form-field>
+        <textarea matInput placeholder="Дополнительная информация" form="residentForm"
+          [formControlName]="ADDITIONAL_INFO_FORM_KEY"></textarea>
+      </mat-form-field>
+
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/residents" type="button">Отмена</button>
+    <button [buttonSpinner]="saveButtonDisabled" [disabled]="saveButtonDisabled  || !form.valid" type="submit"
+      mat-button class="mat-raised-button mat-primary">
+      Сохранить
+    </button>
+  </mat-card-actions>
+</form>

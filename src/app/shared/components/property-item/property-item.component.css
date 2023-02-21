@@ -1,0 +1,12 @@
+:host ::ng-deep .property-item{
+    clear: both;
+}
+
+:host ::ng-deep .property-item :first-child{
+    float: left;
+}
+
+:host ::ng-deep .property-item :last-child{
+    float: right;
+    font-weight: bold;
+}

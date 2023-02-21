@@ -1,0 +1,59 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>how_to_vote</mat-icon>Голосования
+      </h1>
+    </mat-card-title>
+
+    <div>
+      <div class="table-head-controls" [formGroup]="filters">
+        <mat-form-field class="status-filter">
+          <mat-select placeholder="Статус идеи" formControlName="status" multiple>
+            <mat-option *ngFor="let item of statuses" [value]="item.id">
+              {{ item.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <button mat-button class="mat-raised-button mat-primary" routerLink="create">
+          Создать Голосование
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="grid-table">
+    <mat-card *ngFor="let idea of ideas$ | async" class="idea-card">
+      <div class="top-left">
+        <div class="published" *ngIf="idea.status === ideaStatuses.Published">Опубликовано</div>
+        <div class="archived" *ngIf="idea.status === ideaStatuses.Archived">Архив</div>
+      </div>
+
+      <div class="top-right">
+        <button mat-icon-button (click)="edit(idea.id)" title="Редактировать" class="edit-button"
+          *ngIf="idea.status !== ideaStatuses.Archived">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+      </div>
+
+      <mat-card-content>
+        <div class="info-content">
+          <span>{{ idea.additionalInfo }}</span>
+        </div>
+
+        <div class="vote-percents">
+          <div class="percents percents-in-favour">
+            {{ idea.votePercentInFavour }}%
+          </div>
+          <div class="percents percents-abstention">
+            {{ idea.votePercentAbstention }}%
+          </div>
+          <div class="percents percents-against">
+            {{ idea.votePercentAgainst }}%
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

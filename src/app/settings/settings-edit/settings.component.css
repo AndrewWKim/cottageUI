@@ -1,0 +1,18 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10px;
+}
+mat-form-field {
+  max-width: 200px;
+  margin-top: 40px;
+}
+
+.rules {
+  max-width: 100%;
+}
+
+.telegram {
+  max-width: 300px;
+}

@@ -1,0 +1,13 @@
+.table-head-controls{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cars-table {
+    min-width: 768px;
+}
+
+.car-filter-input {
+    margin-right: 8px;
+}

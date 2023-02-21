@@ -1,0 +1,59 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>directions_car</mat-icon>Автомобили
+      </h1>
+    </mat-card-title>
+
+    <div>
+
+      <div class="table-head-controls">
+
+        <mat-form-field class="car-filter-input" floatPlaceholder="never" [formGroup]="filters">
+          <input matInput placeholder="Номер автомобиля" formControlName="carLicensePlate">
+        </mat-form-field>
+
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="cars-table">
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="carLicensePlate">
+              <mat-header-cell *matHeaderCellDef>Гос. номер</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.carLicensePlate}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+              <mat-header-cell *matHeaderCellDef>Марка</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.brand}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="model">
+              <mat-header-cell *matHeaderCellDef>Модель</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.model}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="clientFullName">
+              <mat-header-cell *matHeaderCellDef>Имя клиента</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.clientFullName}}</mat-cell>
+            </ng-container>
+
+          </mat-table>
+        </div>
+
+        <mat-paginator (page)="pageChanged($event)" [length]="paging.total" [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</section>

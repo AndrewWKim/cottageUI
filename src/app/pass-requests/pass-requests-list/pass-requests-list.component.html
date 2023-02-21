@@ -1,0 +1,124 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>book_online</mat-icon>Заявки на временный пропуск
+      </h1>
+    </mat-card-title>
+
+    <div>
+
+      <div class="table-head-controls">
+
+        <mat-form-field class="date-filter-input" floatPlaceholder="never" [formGroup]="filters">
+          <input matInput [matDatepicker]="picker" placeholder="Дата прибытия" #datePicker appMaskDate
+            formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <div class="clear-date-icon" (click)="clearDate()">
+            <mat-icon>clear</mat-icon>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="cottage-filter-input" floatPlaceholder="never" [formGroup]="filters">
+          <mat-select placeholder="Номер участка" formControlName="cottageNumber">
+            <mat-option [value]="">
+              Убрать фильтр
+            </mat-option>
+            <mat-option *ngFor="let item of cottages" [value]="item.id">
+              Участок № {{ item.cottageNumber}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="pass-requests-table">
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <ng-container matColumnDef="passRequestType">
+              <mat-header-cell *matHeaderCellDef>Тип заявки</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+
+                <div class="accessibility" *ngIf="element.passRequestType === passRequestTypes.Car">
+                  <mat-icon matListIcon class="pass-request-icon">
+                    commute
+                  </mat-icon>
+                </div>
+
+                <div class="accessibility" *ngIf="element.passRequestType === passRequestTypes.Person">
+                  <mat-icon matListIcon class="pass-request-icon">
+                    person_pin
+                  </mat-icon>
+                </div>
+
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="carLicensePlate">
+              <mat-header-cell *matHeaderCellDef>Номер / Имя</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{getCorrectNameValue(element)}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="carBrand">
+              <mat-header-cell *matHeaderCellDef>Марка автомобиля</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.carBrand || '-'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="carModel">
+              <mat-header-cell *matHeaderCellDef>Модель автомобиля</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.carModel || '-'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="visitDate">
+              <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.visitDate | date: 'dd.MM.yyyy'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="visitTime">
+              <mat-header-cell *matHeaderCellDef>Время</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.visitTime}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="additionalInfo">
+              <mat-header-cell *matHeaderCellDef>Доп. инфо</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.additionalInfo}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="clientName">
+              <mat-header-cell *matHeaderCellDef>Создатель заявки</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.clientName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="cottageNumber">
+              <mat-header-cell *matHeaderCellDef>Номер участка</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.cottageNumber}}</mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="delete(element.id)" title="Удалить">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+          </mat-table>
+        </div>
+
+        <mat-paginator (page)="pageChanged($event)" [length]="paging.total" [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</section>

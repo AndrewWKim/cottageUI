@@ -1,0 +1,8 @@
+<section>
+  <mat-card>
+      <mat-card-title>
+        <h1>Редактирование Новости</h1>
+      </mat-card-title>
+    <app-news-form [news]="news" (onSubmit)="editNews($event)"></app-news-form>
+  </mat-card>
+</section>

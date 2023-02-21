@@ -1,0 +1,117 @@
+<section>
+  <mat-card>
+    <mat-card-title class="no-l-marg">
+      <h1>
+        <mat-icon matListIcon>pending_actions</mat-icon>Коммунальные счета
+      </h1>
+    </mat-card-title>
+
+    <div>
+
+      <div class="table-head-controls">
+
+        <mat-form-field class="communal-bill-filter-input" floatPlaceholder="never" [formGroup]="filters">
+          <mat-select placeholder="Номер участка" formControlName="cottageId">
+            <mat-option [value]="">
+              Убрать фильтр
+            </mat-option>
+            <mat-option *ngFor="let item of cottages" [value]="item.id">
+              Участок № {{item.cottageNumber}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="communal-bill-filter-input" floatPlaceholder="never" [formGroup]="filters">
+          <mat-select placeholder="Месяц" formControlName="month">
+            <mat-option [value]="">
+              Убрать фильтр
+            </mat-option>
+            <mat-option *ngFor="let item of months" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field floatPlaceholder="never" [formGroup]="filters">
+          <mat-select placeholder="Год" formControlName="year">
+            <mat-option [value]="">
+              Убрать фильтр
+            </mat-option>
+            <mat-option *ngFor="let item of years" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <mat-card-content>
+        <div class="table-wrapper">
+          <mat-table [dataSource]="dataSource" class="communal-bills-table">
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <!-- <ng-container matColumnDef="cottageNumber">
+              <mat-header-cell *matHeaderCellDef>Номер участка</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.cottageNumber}}</mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="cottageOwner">
+              <mat-header-cell *matHeaderCellDef>Владелец участка</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.cottageOwner || 'Владельца НЕТ'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="communalType">
+              <mat-header-cell *matHeaderCellDef>Тип услуги</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.communalType}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="month">
+              <mat-header-cell *matHeaderCellDef>Месяц</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{getMonthName(element.month)}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="year">
+              <mat-header-cell *matHeaderCellDef>Год</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.year}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>Сумма (грн)</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.price.toFixed(2)}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="paymentStatus">
+              <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                  <div *ngIf="element.paymentStatus === paymentStatus.Paid" class="paid">Оплачено</div>
+                  <div *ngIf="element.paymentStatus === paymentStatus.Unpaid" class="unpaid">Не оплачено</div>
+                  <div *ngIf="element.paymentStatus === paymentStatus.InProcess" class="process">В обработке</div>
+                  <div *ngIf="element.paymentStatus === paymentStatus.Partialy" class="partialy">Частично оплачено</div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="openEditDialog(element)" title="Редактировать" *ngIf="element.paymentStatus !== paymentStatus.InProcess">
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+          </mat-table>
+        </div>
+
+        <mat-paginator (page)="pageChanged($event)" [length]="paging.total" [pageSize]="paging.limit"
+          [pageIndex]="paging.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</section>

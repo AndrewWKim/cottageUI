@@ -1,0 +1,15 @@
+<div>
+  <div class="flex-row">
+    <app-time-picker [time]="range.startTime" [placeholder]="'From'"
+      (onTimeChange)="onStartTimeChange($event)"
+      (onTimeFormatChange)="onStartFormatChange($event)" #startTimeComponent></app-time-picker>
+    <app-time-picker [time]="range.endTime" [placeholder]="'To'"
+      (onTimeChange)="onEndTimeChange($event)"
+      (onTimeFormatChange)="onEndFormatChange($event)" #endTimeComponent></app-time-picker>
+  </div>
+  <div class="flex-row" *ngIf="endTimeComponent.timeForm.errors?.invalidRange">
+    <mat-error>
+      Invalid range
+    </mat-error>
+  </div>
+</div>
